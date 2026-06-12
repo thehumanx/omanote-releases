@@ -42,3 +42,15 @@ Windows may show **"Windows protected your PC"** when running the installer. Cli
 - **Debian/Ubuntu:** `sudo dpkg -i omanote_x.y.z_amd64.deb`
 - **Fedora:** `sudo rpm -i omanote-x.y.z-1.x86_64.rpm`
 - **AppImage:** `chmod +x omanote_x.y.z_amd64.AppImage` and run it.
+
+### AppImage shows a blank window / "Could not create default EGL display"
+
+The v0.22.0 AppImage bundles an older `libwayland-client` that conflicts
+with newer Mesa drivers (seen on Arch with Intel Arc graphics). Launch it
+with the system library instead:
+
+```sh
+LD_PRELOAD=/usr/lib/libwayland-client.so ./omanote_0.22.0_amd64.AppImage
+```
+
+Fixed in releases after v0.22.0 (the AppImage no longer bundles libwayland).
